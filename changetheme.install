@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Definition of hook_schema();
+ */
+function changetheme_schema() {
+  $schema = array();
+
+  $schema['changetheme'] = array(
+    'description'     => 'Changetheme for a user in all groups',
+    'fields'          => array(
+      'nid'             => array(
+        'description'   => "The group's {node}.nid.",
+        'type'          => 'int',
+        'size'          => 'normal',
+        'not null'      => TRUE,
+      ),
+      'uid'             => array(
+        'description'   => 'The user.',
+        'type'          => 'int',
+        'size'          => 'normal',
+        'not null'      => TRUE,
+      ),
+      'space_theme'     => array(
+        'description'   => 'The group specific theme (if any).',
+        'type'          => 'varchar',
+        'length'        => 255,
+        'not null'      => FALSE,
+      ),
+    ),
+    'primary key'       => array('nid', 'uid'),
+  );
+
+  return $schema;
+}
+
+function changetheme_install() {
+  drupal_install_schema('changetheme');
+}
+
+function changetheme_uninstall() {
+  drupal_uninstall_schema('changetheme');
+}
